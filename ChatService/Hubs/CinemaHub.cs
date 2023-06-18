@@ -1,6 +1,7 @@
 ﻿using ChatService.DAL;
 using ChatService.Interface;
 using ChatService.Model;
+using CinemaService.Model;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Identity.Client;
 using System;
@@ -70,11 +71,11 @@ namespace ChatService.Hubs
                 await Clients.Group(userConnection.Room).SendAsync("ReceiveLink", youTubeLink);
             }
         }
-        public async Task SendPlayerState(bool videoState)
+        public async Task SendPlayerState(VideoState video)
         {
             if (_connections.TryGetValue(Context.ConnectionId, out UserConnection userConnection))
             {
-                await Clients.OthersInGroup(userConnection.Room).SendAsync("ReceivePlayerState", videoState);
+                await Clients.OthersInGroup(userConnection.Room).SendAsync("ReceivePlayerState", video.playerState, video.playedSeconds);
             }
         }
 

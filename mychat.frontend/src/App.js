@@ -11,6 +11,7 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [youTubeLink, setYoutubeLink] = useState(null)
   const [playerState, setPlayerState ] = useState(false)
+  const [playerSeconds, setPlayedSeconds]=useState(1)
 
   const joinRoom = async (user, room) => {
     try {
@@ -27,8 +28,9 @@ const App = () => {
         setYoutubeLink(youtubeLinkFromServer);
       });
 
-      connection.on("ReceivePlayerState", (playerStateFromServer) =>{
+      connection.on("ReceivePlayerState", (playerStateFromServer, playedSecondsFromServer) =>{
         setPlayerState(playerStateFromServer);
+        setPlayedSeconds(playedSecondsFromServer);
       });
 
       connection.on("UsersInRoom", (users) => {
@@ -72,8 +74,8 @@ const sendYoutubeLink = async(youTubeLink) =>{
   }
 }
 
-const sendPlayerState = async(playerState) => {
-  try{await connection.invoke("SendPlayerState", playerState)}
+const sendPlayerState = async(playerState, playedSeconds) => {
+  try{await connection.invoke("SendPlayerState", {playerState, playedSeconds})}
   catch(e){
     console.log(e);
   }
@@ -92,7 +94,8 @@ const sendPlayerState = async(playerState) => {
           sendYoutubeLink={sendYoutubeLink} 
           youTubeLink={youTubeLink} 
           playerState ={playerState}
-          sendPlayerState ={sendPlayerState} />}
+          sendPlayerState ={sendPlayerState}
+          playerSeconds ={playerSeconds} />}
   </div>
 }
 

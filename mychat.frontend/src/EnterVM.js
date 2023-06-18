@@ -7,7 +7,7 @@ import './EnterVM.css'
 
 const EnterVM = () => {
   return (
-    <div className="EnterVM">
+    <div className="EnterVM" style={{margin: 'auto', position: 'absolute', top: '20%', color: 'whitesmoke' }}>
         <Routes>
           <Route exact path="/" Component={SignUp} />
           <Route exact path="/SignIn" Component={SignIn} />

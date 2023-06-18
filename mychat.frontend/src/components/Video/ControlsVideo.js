@@ -1,6 +1,7 @@
 import React from "react";
+import Progress from "./components/Progress";
 
-const ControlsVideo = ({classes, handlePlay, playing, handleVolume, volume}) => {
+const ControlsVideo = ({classes, handlePlay, playing, handleVolume, volume, duration, playedSeconds, handleProgressControls}) => {
     return(
         <>
             
@@ -17,8 +18,14 @@ const ControlsVideo = ({classes, handlePlay, playing, handleVolume, volume}) => 
                 max="1"
                 step="0.1"
                 onChange={handleVolume}
-                value={volume}></input>
-            Controls</div>
+                value={volume}/>
+                <Progress
+                classes = {classes}
+                duration ={duration}
+                playedSeconds ={playedSeconds}
+                handleProgressControls ={handleProgressControls}
+                />
+            </div>
             
         </>
     )

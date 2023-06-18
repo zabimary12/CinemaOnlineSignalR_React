@@ -4,6 +4,7 @@ using ChatService.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -27,8 +28,7 @@ namespace ChatService
             });
 
             services.AddSingleton<IDictionary<string, UserConnection>>(opts => new Dictionary<string, UserConnection>());
-            services.AddScoped<IAuthUser, AuthUser>();
-            
+            services.AddScoped<IAuthUser, AuthUser>();;
 
             services.AddSwaggerGen();
             services.AddMvc();

@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 
 
-const Chat = ({ sendMessage, messages, users, closeConnection, sendYoutubeLink, youTubeLink, playerState, sendPlayerState }) => 
+const Chat = ({ sendMessage, messages, users, closeConnection, sendYoutubeLink, youTubeLink, playerState, sendPlayerState, playerSeconds }) => 
 <div>
     <div className='leave-room'>
         <Button variant='danger' onClick={() => closeConnection()}>Leave Room</Button>
@@ -16,7 +16,7 @@ const Chat = ({ sendMessage, messages, users, closeConnection, sendYoutubeLink, 
     <ConnectedUsers users={users} />
     <div className='chat'>
         <FormForURL sendYoutubeLink={sendYoutubeLink}/>
-        <VideoPlayer youTubeLink={youTubeLink} playerState={playerState} sendPlayerState = {sendPlayerState}/>
+        <VideoPlayer youTubeLink={youTubeLink} playerState={playerState} sendPlayerState = {sendPlayerState} playerSeconds= {playerSeconds}/>
         <MessageContainer messages={messages} />
         <SendMessageForm sendMessage={sendMessage} />
     </div>

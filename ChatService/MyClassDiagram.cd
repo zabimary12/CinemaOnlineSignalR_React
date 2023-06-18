@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="ChatService.Model.Room">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAIAAAAAAAAAAg=</HashCode>
+      <FileName>Model\Room.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatService.Model.SignInRequest">
+    <Position X="10.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Model\SignInRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatService.Model.SignUpRequest">
+    <Position X="12.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAgAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Model\SignUpRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatService.Model.SimpleResponse">
+    <Position X="13.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Model\SimpleResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatService.Model.Video">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Model\Video.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatService.DAL.User">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Model\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatService.DAL.UserConnection">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\UserConnection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatService.Hubs.CinemaHub">
+    <Position X="7.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAECAAACBABAAAgAAAEAAAAAAAAAAABAA=</HashCode>
+      <FileName>Hubs\CinemaHub.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatService.DAL.AuthUser">
+    <Position X="11.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAACAAAAACAEAAAAAAAAAAAACAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>DAL\AuthUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ChatService.DAL.RoomsRepository">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUAAAAAAABAAAAAAAAAAAAAAAABAAoAAQAAAAAAAAAA=</HashCode>
+      <FileName>DAL\RoomsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatService.Controller.AuthController">
+    <Position X="13.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAACAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controller\AuthController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ChatService.Interface.IAuthUser">
+    <Position X="11.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\IAuthUser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

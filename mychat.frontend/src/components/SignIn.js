@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
+import { Link, useNavigate } from 'react-router-dom';
 
 const authServices = new AuthServices()
 
@@ -117,7 +118,7 @@ export default class SignIn extends Component {
             </form>
           </div>
           <div className="Buttons" style={{ alignItems: 'flex-start' }}>
-            <Button className="Btn" color="primary" onClick={this.handleSignUp}>
+            <Button className="Btn" color="primary" component={Link} to={'/'}>
               Sign Up
             </Button>
             <Button

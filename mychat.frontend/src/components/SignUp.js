@@ -75,7 +75,7 @@ export default class SignUp extends Component {
           console.log('data : ', data)
           if (data.data.isSuccess) {
             console.log('Sign Up Confirmd')
-            this.setState({ open: true, Message: '4.5.0' })
+            this.setState({ open: true, Message: 'Sign Up Confirmd' })
           } else {
             console.log('Sign Up Failed')
             this.setState({ open: true, Message: 'Sign Up Failed' })
@@ -102,16 +102,16 @@ export default class SignUp extends Component {
   // handleSignIn = (e) => {
   //   // useNavigate('/SignIn');
   //   // const navigate = useNavigate();
-  //   navigate('/SignIn');
+  //   this.props.history.push('/SignIn');
   // }
 
   render() {
     console.log('state : ', this.state)
     return (
-      <div className="SignUp-Container">
+      <div className="SignUp-Container" >
         <div className="SignUp-SubContainer">
           <div className="Header">Sign Up</div>
-          <div className="Body">
+          <div className="Body" style={{color:'white'}}>
             <form className="form">
               <TextField
                 className="TextField"

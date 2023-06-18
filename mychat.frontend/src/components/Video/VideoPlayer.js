@@ -1,28 +1,56 @@
 import ReactPlayer from "react-player"
 import ControlsVideo from "./ControlsVideo"
 import classes from './../../styles/video-styles.module.scss'
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
-const VideoPlayer =({youTubeLink, playerState, sendPlayerState}) => {
+const VideoPlayer =({youTubeLink, playerState, sendPlayerState, playerSeconds}) => {
     
-const [state, setState] = useState({playing:false});
-const [volume, setVolume] = useState(0.6)
+const [state, setState] = useState({
+    playing:false,
+    duration:1,
+    playedSeconds:0
+});
+
+const [volume, setVolume] = useState(0.6);
+
+
 useEffect(() => {
-    setState({...state, playing:!playerState});
-  }, [playerState]);
+    setState(prevState => ({
+      ...prevState,
+      playing: playerState,
+      playedSeconds: playerSeconds
+    }));
+    refPlayer.current.seekTo(playerSeconds)
+  }, [playerState, playerSeconds]);
 
 const{
-    playing
+    playing,
+    duration,
+    playedSeconds,
 }=state
 
+const refPlayer = useRef();
 
+const handleProgress =(e) =>{
+    setState({...state, ...e})
+};
 const handlePlay = () =>{ 
     setState({...state, playing:!state.playing}); 
-sendPlayerState(playing)};
+    sendPlayerState(!state.playing, playedSeconds)
+};
 
 const handleVolume =(e) =>{
     setVolume(parseFloat(e.target.value))
 };
+
+const handleProgressControls = (e) => {
+    refPlayer.current.seekTo(Number(e));
+    setState({...state, playing:false});
+    sendPlayerState(false, Number(e));
+}
+const handleDuration =(e) =>{
+    setState({...state, duration:e});
+}
 
     return (
         <div className={classes.videoWrapper} >
@@ -31,13 +59,19 @@ const handleVolume =(e) =>{
             height="400px"
             playing ={playing}
             volume={volume}
+            ref={refPlayer}
+            onProgress={handleProgress}
+            onDuration ={handleDuration}
           /> 
           <ControlsVideo 
           classes ={classes}
           handlePlay ={handlePlay}
           playing ={playing}
           handleVolume={handleVolume}
-          volume={volume}/>
+          volume={volume}
+          duration={duration}
+          playedSeconds={playedSeconds}
+          handleProgressControls={handleProgressControls}/>
         </div>
     )
 }
