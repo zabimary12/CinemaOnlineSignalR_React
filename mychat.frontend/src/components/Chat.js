@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 
 
-const Chat = ({ sendMessage, messages, users, closeConnection, sendYoutubeLink, youTubeLink, playerState, sendPlayerState, playerSeconds }) => 
+const Chat = ({roomName, sendMessage, messages, users, closeConnection, sendYoutubeLink, youTubeLink, playerState, sendPlayerState, playerSeconds }) => 
 <div>
     <div className='leave-room'>
         <Button variant='danger' onClick={() => closeConnection()}>Leave Room</Button>

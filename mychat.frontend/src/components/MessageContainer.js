@@ -14,7 +14,7 @@ const MessageContainer = ({ messages }) => {
         {messages.map((m, index) =>
             <div key={index} className='user-message'>
                 <div className='message bg-primary'>{m.message}</div>
-                <div className='from-user'>{m.user}</div>
+                <div className='from-user'>{m.userName}</div>
             </div>
         )}
     </div>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import AuthServices from '../services/AuthServices'
 //import './SignUp.scss'
 import TextField from '@material-ui/core/TextField'
@@ -10,153 +10,169 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const authServices = new AuthServices()
 
-export default class SignIn extends Component {
-  constructor() {
-    super()
-    this.state = {
-      Radiovalue: 'User',
-      UserName: '',
-      UserNameFlag: false,
-      Password: '',
-      PasswordFlag: false,
-      open: false,
-      Message: '',
-    }
-  }
+export default function SignIn() {
+  const navigate = useNavigate();
 
-  handleClose = (e, reason) => {
+  const [state, setState] = useState({
+    Radiovalue: 'User',
+    UserName: '',
+    UserNameFlag: false,
+    Password: '',
+    PasswordFlag: false,
+    open: false,
+    Message: '',
+  });
+
+  const handleClose = (e, reason) => {
     if (reason === 'clickaway') {
-      return
+      return;
     }
-    this.setState({ open: false })
-  }
+    setState((prevState) => ({ ...prevState, open: false }));
+  };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-  handleChange = (e) => {
-    const { name, value } = e.target
-    this.setState(
-      { [name]: value },
-      console.log('Name : ', name, 'Value : ', value),
-    )
-  }
+  const handleSignUp = (e) => {
+    navigate('/');
+  };
 
-  handleSignUp = (e) => {
-    this.props.history.push('/')
-  }
+  const CheckValidation = () => {
+    console.log('CheckValidation Calling...');
 
-  CheckValidation() {
-    console.log('CheckValidation Calling...')
+    setState((prevState) => ({
+      ...prevState,
+      UserNameFlag: false,
+      PasswordFlag: false,
+    }));
 
-    this.setState({ UserNameFlag: false, PasswordFlag: false })
-
-    if (this.state.UserName === '') {
-      this.setState({ UserNameFlag: true })
+    if (state.UserName === '') {
+      setState((prevState) => ({ ...prevState, UserNameFlag: true }));
     }
-    if (this.state.Password === '') {
-      this.setState({ PasswordFlag: true })
+    if (state.Password === '') {
+      setState((prevState) => ({ ...prevState, PasswordFlag: true }));
     }
-  }
+  };
 
-  handleSubmit = (e) => {
-    this.CheckValidation()
-    if (this.state.UserName !== '' && this.state.Password !== '') {
-      console.log('Acceptable')
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    CheckValidation();
+    if (state.UserName !== '' && state.Password !== '') {
+      console.log('Acceptable');
       let data = {
-        Name: this.state.UserName,
-        Password: this.state.Password
-      }
+        Name: state.UserName,
+        Password: state.Password,
+      };
       authServices
         .SignIn(data)
         .then((data) => {
-          console.log('Data : ', data)
+          console.log('Data : ', data);
           if (data.data.isSuccess) {
-            this.props.history.push('/HomePage')
+            navigate('/App', { state: { userName: state.UserName }})
           } else {
-            console.log('Something Went Wrong')
-            this.setState({ open: true, Message: 'LogIn UnSuccessfully' })
+            console.log('Something Went Wrong');
+            setState((prevState) => ({
+              ...prevState,
+              open: true,
+              Message: 'LogIn UnSuccessfully',
+            }));
           }
         })
         .catch((error) => {
-          console.log('Error : ', error)
-          this.setState({ open: true, Message: 'Something Went Wrong' })
-        })
+          console.log('Error : ', error);
+          setState((prevState) => ({
+            ...prevState,
+            open: true,
+            Message: 'Something Went Wrong',
+          }));
+        });
     } else {
-      console.log('Not Acceptable')
-      this.setState({ open: true, Message: 'Please Field Mandetory Field' })
+      console.log('Not Acceptable');
+      setState((prevState) => ({
+        ...prevState,
+        open: true,
+        Message: 'Please Field Mandetory Field',
+      }));
     }
-  }
+  };
 
-  render() {
-    console.log('State : ', this.state)
-    return (
-      <div className="SignUp-Container">
-        <div className="SignUp-SubContainer">
-          <div className="Header">Sign In</div>
-          <div className="Body">
-            <form className="form">
-              <TextField
-                className="TextField"
-                name="UserName"
-                label="UserName"
-                variant="outlined"
-                size="small"
-                error={this.state.UserNameFlag}
-                value={this.state.UserName}
-                onChange={this.handleChange}
-              />
-              <TextField
-                className="TextField"
-                type="password"
-                name="Password"
-                label="Password"
-                variant="outlined"
-                size="small"
-                error={this.state.PasswordFlag}
-                value={this.state.Password}
-                onChange={this.handleChange}
-              />
-            </form>
-          </div>
-          <div className="Buttons" style={{ alignItems: 'flex-start' }}>
-            <Button className="Btn" color="primary" component={Link} to={'/'}>
-              Sign Up
-            </Button>
-            <Button
-              className="Btn"
-              variant="contained"
-              color="primary"
-              onClick={this.handleSubmit}
-            >
-              Sign In
-            </Button>
-          </div>
+  console.log('State : ', state);
+
+  return (
+    <div className="SignUp-Container">
+      <div className="SignUp-SubContainer">
+      <h2 className="Header"style={{ color: 'Black', fontWeight: 'bold' }}>Sign In</h2>
+        <div className="Body">
+          <form className="form">
+            <TextField
+              className="TextField"
+              name="UserName"
+              label="UserName"
+              variant="outlined"
+              size="small"
+              style={{ backgroundColor: 'white' }}
+              error={state.UserNameFlag}
+              value={state.UserName}
+              onChange={handleChange}
+            />
+            <TextField
+              className="TextField"
+              type="password"
+              name="Password"
+              label="Password"
+              variant="outlined"
+              size="small"
+              style={{ backgroundColor: 'white' }}
+              error={state.PasswordFlag}
+              value={state.Password}
+              onChange={handleChange}
+            />
+          </form>
         </div>
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          open={this.state.open}
-          autoHideDuration={6000}
-          onClose={this.handleClose}
-          message={this.state.Message}
-          action={
-            <React.Fragment>
-              <Button color="secondary" size="small" onClick={this.handleClose}>
-                UNDO
-              </Button>
-              <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={this.handleClose}
-              >
-                <CloseIcon fontSize="small" />
-              </IconButton>
-            </React.Fragment>
-          }
-        />
+        <div className="Buttons" style={{ alignItems: 'flex-start' }}>
+          <Button className="Btn" color="primary" component={Link} to={'/'}>
+            Sign Up
+          </Button>
+          <Button
+            className="Btn"
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+          >
+            Sign In
+          </Button>
+        </div>
       </div>
-    )
-  }
-}
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={state.open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={state.Message}
+        action={
+          <React.Fragment>
+            <Button color="secondary" size="small" onClick={handleClose}>
+              UNDO
+            </Button>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
+    </div>
+  );
+};
